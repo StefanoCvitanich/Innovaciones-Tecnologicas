@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using UnityEngine.Analytics;
 
 public class gameplay : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class gameplay : MonoBehaviour
     private int randomOpponent = 0;
     private string value;
     private int wins = 0;
+	private int ties = 0;
     public Text victorias;
 
     // Use this for initialization
@@ -42,37 +44,36 @@ public class gameplay : MonoBehaviour
 
         dadosOponente.text = value;
 
-        if (randomPlayer > randomOpponent)
-            wins++;
+		if (randomPlayer > randomOpponent) 
+		{
+			wins++;
+
+			if (wins % 3 == 0) 
+			{
+				ShowAd();
+				Debug.Log ("Deberia haber mostrado los Ads");
+			}
+		}
+
+		else if (randomPlayer == randomOpponent) 
+		{
+			ties++;
+
+			if(ties %5 == 0)
+				Analytics.CustomEvent ("Tie", new Dictionary<string, object>
+				{ 
+					{"ties", ties}
+				});
+		}
+			
 
         victorias.text = "Victorias: " + wins.ToString();
 
-        if (wins >= 1)
-        {
-            ShowAd();
-        }
     }
 
-    private void ShowAd()
-    {
-        if (Advertisement.IsReady("rewardedVideo"))
-        {
-
-            ShowOptions debuggeo = new ShowOptions { resultCallback = laquequieras };
-            Advertisement.Show("rewardedVideo", debuggeo);
-        }
-    }
-
-    private void laquequieras(ShowResult result) {
-
-        switch (result) {
-            case ShowResult.Finished:
-                Debug.Log("Se mostro el auncio");
-                break;
-            case ShowResult.Failed:
-                Debug.Log("Fallo el anuncio");
-                break;
-        }
-
-    }
+	private void ShowAd()
+	{
+		if (Advertisement.IsReady())
+			Advertisement.Show();
+	}
 }

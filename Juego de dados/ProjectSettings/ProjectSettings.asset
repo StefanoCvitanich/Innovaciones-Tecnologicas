@@ -462,8 +462,9 @@ PlayerSettings:
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 1
     UNet: 1
   cloudProjectId: 6271c212-e1b7-473b-934c-a383963cc835
-  projectName: New Unity Project (1)
+  projectName: "Juego de Dados para Innovaciones Tecnol\xF3gicas"
   organizationId: sonny_asmita
   cloudEnabled: 0
