@@ -20,7 +20,7 @@ public class gameplay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+		Advertisement.Initialize ("1395397", true);
     }
 
     // Update is called once per frame
@@ -51,7 +51,6 @@ public class gameplay : MonoBehaviour
 			if (wins % 3 == 0) 
 			{
 				ShowAd();
-				Debug.Log ("Deberia haber mostrado los Ads");
 			}
 		}
 
